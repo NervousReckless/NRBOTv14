@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { player } = require("../../index");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -31,11 +32,21 @@ module.exports = {
       });
 
     await queue.skip(voiceChannel);
-    return interaction.reply({
+    player.send({
       embeds: [
         new EmbedBuilder()
           .setColor("#00ff00")
           .setDescription("Song has been skipped."),
+      ],
+    });
+    return interaction.reply({
+      embeds: [
+        new EmbedBuilder()
+          .setColor("#00ff00")
+          .setTitle("Request recived")
+          .setDescription(
+            `For music notification check <#1025431924426153995>`
+          ),
       ],
     });
   },

@@ -3,6 +3,7 @@ const {
   GatewayIntentBits,
   Partials,
   Collection,
+  WebhookClient,
 } = require("discord.js");
 const {
   Guilds,
@@ -16,6 +17,11 @@ const { DisTube } = require("distube");
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 const { User, Message, GuildMember, ThreadMember, Channel } = Partials;
 require("dotenv").config();
+
+const player = new WebhookClient({
+  id: "1025432178844258476",
+  token: "pFV71t92PTMLo9mmK-EbXsD3ud7UNWeXbPKVem4PZTXtd1LXIwcvp9w7hsdeRfyXtYm9",
+});
 
 const client = new Client({
   intents: [
@@ -42,6 +48,6 @@ client.distube = new DisTube(client, {
 });
 
 loadEvents(client);
-module.exports = { client };
+module.exports = { client, player };
 
 client.login(process.env.TOKEN);

@@ -1,6 +1,11 @@
 // const { loadEvents } = require("../Handlers/eventHandler")
-const { client } = require("../index");
+const { client, player } = require("../index");
 const { EmbedBuilder } = require("discord.js");
+
+// const player = new WebhookClient({
+//   id: "1025432178844258476",
+//   token: "pFV71t92PTMLo9mmK-EbXsD3ud7UNWeXbPKVem4PZTXtd1LXIwcvp9w7hsdeRfyXtYm9",
+// });
 
 const status = (queue) =>
   `Volume: \`${queue.volume}%\` | Filter: \`${
@@ -15,33 +20,39 @@ const status = (queue) =>
 
 client.distube
   .on("playSong", (queue, song) =>
-    queue.textChannel.send({
+    player.send({
       embeds: [
         new EmbedBuilder()
           .setColor("#00ff00")
-          .setDescription(
-            `▶️  Playing \`${song.name}\` - \`${
-              song.formattedDuration
-            }\`\nRequested by: ${song.user}\n${status(queue)}`
+          .setTitle("🎶 Playing 🎶")
+          .addFields({ name: "Name", value: `${song.name}` })
+          .addFields(
+            { name: "Requested by", value: `${song.user}`, inline: true },
+            {
+              name: "Duration",
+              value: `${song.formattedDuration}`,
+              inline: true,
+            },
+            { name: "Queue settings", value: `${status(queue)}` }
           ),
       ],
     })
   )
 
   .on("addSong", (queue, song) =>
-    queue.textChannel.send({
+    player.send({
       embeds: [
         new EmbedBuilder()
           .setColor("#00ff00")
-          .setDescription(
-            `🔼  Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
-          ),
+          .setTitle("▶️ Added to queue")
+          .setDescription(`${song.name} - \`${song.formattedDuration}\``)
+          .addFields({ name: "Requested by", value: `${song.user}` }),
       ],
     })
   )
 
   .on("addList", (queue, playlist) =>
-    queue.textChannel.send({
+    player.send({
       embeds: [
         new EmbedBuilder()
           .setColor("#00ff00")
@@ -89,7 +100,7 @@ client.distube
   )
 
   .on("finish", (queue) =>
-    queue.textChannel.send({
+    player.send({
       embeds: [
         new EmbedBuilder().setColor("#00ff00").setDescription("Finished!"),
       ],

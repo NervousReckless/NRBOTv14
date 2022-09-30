@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { player } = require("../../index");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -42,11 +43,21 @@ module.exports = {
       });
 
     await queue.setVolume(volume, interaction.options.getString("query"));
-    return interaction.reply({
+    player.send({
       embeds: [
         new EmbedBuilder()
           .setColor("#00ff00")
           .setDescription(`Volume has been changed to ${volume}%`),
+      ],
+    });
+    return interaction.reply({
+      embeds: [
+        new EmbedBuilder()
+          .setColor("#00ff00")
+          .setTitle("Request recived")
+          .setDescription(
+            `For music notification check <#1025431924426153995>`
+          ),
       ],
     });
   },
