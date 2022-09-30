@@ -35,7 +35,7 @@ module.exports = {
     let query = interaction.options.getString("query");
 
     try {
-      client.distube.play(voiceChannel, query, {
+      await client.distube.play(voiceChannel, query, {
         textChannel: channel,
         member: member,
       });
