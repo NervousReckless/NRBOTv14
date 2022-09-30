@@ -18,8 +18,8 @@ module.exports = {
     let voiceChannel = currentUser.voice.channel;
 
     const queue = await client.distube.getQueue(voiceChannel);
-
-    var volume = parseInt(options.getString("query"));
+    // console.log(interaction.options.getString("query"));
+    var volume = parseInt(interaction.options.getString("query"));
 
     if (volume > 100) volume = 100;
 
@@ -41,7 +41,7 @@ module.exports = {
         ],
       });
 
-    await queue.setVolume(volume, options.getString("query"));
+    await queue.setVolume(volume, interaction.options.getString("query"));
     return interaction.reply({
       embeds: [
         new EmbedBuilder()

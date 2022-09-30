@@ -38,7 +38,7 @@ client.distube = new DisTube(client, {
   leaveOnEmpty: true,
   leaveOnFinish: true,
   emitAddListWhenCreatingQueue: false,
-  plugins: [new YtDlpPlugin()],
+  plugins: [new YtDlpPlugin({ update: true })],
 });
 
 loadEvents(client);
