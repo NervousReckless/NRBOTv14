@@ -24,6 +24,7 @@
     "glob": "^8.0.3",
     "jquery": "^3.6.1",
     "lavacord": "^1.1.9",
-    "libsodium-wrappers": "^0.7.10"
+    "libsodium-wrappers": "^0.7.10",
+    "mongoose": "^6.6.3"
   }
 }

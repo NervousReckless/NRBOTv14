@@ -48,6 +48,7 @@ client.distube = new DisTube(client, {
 });
 
 loadEvents(client);
+
 module.exports = { client, player };
 
 client.login(process.env.TOKEN);
