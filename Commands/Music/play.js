@@ -39,21 +39,25 @@ module.exports = {
         textChannel: channel,
         member: member,
       });
-      return interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor("#00ff00")
-            .setTitle("Request recived")
-            .setDescription(
-              `For music notification check <#1025431924426153995>`
-            ),
-        ],
-      });
+      return interaction
+        .reply({
+          embeds: [
+            new EmbedBuilder()
+              .setColor("#00ff00")
+              .setTitle("Request recived")
+              .setDescription(
+                `For music notification check <#1025431924426153995>`
+              ),
+          ],
+        })
+        .catch((e) => {});
     } catch (e) {
       const errorEmbed = new EmbedBuilder()
         .setColor("BLUE")
         .setDescription(`Alert: ${e}`);
-      return interaction.reply({ embeds: [errorEmbed] });
+      return interaction.reply({
+        embeds: [errorEmbed],
+      });
     }
   },
 };

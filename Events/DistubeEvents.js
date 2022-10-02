@@ -10,12 +10,6 @@ const { EmbedBuilder } = require("discord.js");
 const status = (queue) =>
   `Volume: \`${queue.volume}%\` | Filter: \`${
     queue.filters.names.join(", ") || "Off"
-  }\` | Loop: \`${
-    queue.repeatMode
-      ? queue.repeatMode === 2
-        ? "All Queue"
-        : "This Song"
-      : "Off"
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 
 client.distube
@@ -27,13 +21,18 @@ client.distube
           .setTitle("🎶 Playing 🎶")
           .addFields({ name: "Name", value: `${song.name}` })
           .addFields(
-            { name: "Requested by", value: `${song.user}`, inline: true },
             {
               name: "Duration",
               value: `${song.formattedDuration}`,
               inline: true,
             },
-            { name: "Queue settings", value: `${status(queue)}` }
+            { name: "Volume", value: `${queue.volume}`, inline: true },
+            {
+              name: "Autoplay",
+              value: `${queue.autoplay ? "On" : "Off"}`,
+              inline: true,
+            },
+            { name: "Requested by", value: `${song.user}` }
           ),
       ],
     })
